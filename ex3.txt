@@ -1,0 +1,6 @@
+%include "path/ex1.sas";
+%include "path/ex2.sas";
+
+%FileNameReader(dir="path");
+%prgm2(dir="path");
+

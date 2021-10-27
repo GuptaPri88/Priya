@@ -1,0 +1,29 @@
+
+
+%macro prgm2(dir=); /*files directory path*/
+Proc sql;
+Select distinct Filename,count(distinct Filename) 
+into:act separated by "@" , : n from perm.history;
+quit;
+
+%do i= 1 %to &n;
+%let ac = %scan(&act,&i,"@");
+
+proc import out = %scan(&ac,1,".");
+ Datafile = "&dir./&ac."
+ DBMS= %scan(&ac,-1,".") REPLACE;
+Getnames = YES;
+Run;
+
+data temp_data;
+filename = "&ac";
+length Status $11;
+if &syserr =0 then Status = "Successful";
+else Status = "Failed";
+run;
+
+proc append base=perm_data data=temp_data;
+run;
+
+%end;
+%mend prgm2;
