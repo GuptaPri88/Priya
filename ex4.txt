@@ -4,6 +4,6 @@
 %FileNameReader(dir="path");
 %prgm2(dir="path");
 
-data perm.history
+data perm.history;
 set perm_data;
 Run;
