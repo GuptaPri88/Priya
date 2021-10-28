@@ -4,14 +4,14 @@
 %FileNameReader(dir="path");
 %prgm2(dir="path");
 
-data perm.history
+data perm.history;
 set perm_data;
 Run;
 
 %macro prgm5(dir=); /*directory path*/
 Proc sql;
-Select distinct Filename,count(distinct Filename) 
-into:act separated by "@" , : n from perm.history where status ne "Succesful";
+Select distinct Filename, count(distinct Filename) 
+into :act separated by "@" , :n from perm.history where status ne "Succesful";
 quit;
 
 %do i= 1 %to &n;
@@ -26,4 +26,4 @@ Run;
 %end;
 %mend prgm5;
 
-%prgm(dir="path");
+%prgm5(dir="path");
