@@ -2,8 +2,8 @@
 
 %macro prgm2(dir=); /*files directory path*/
 Proc sql;
-Select distinct Filename,count(distinct Filename) 
-into:act separated by "@" , : n from perm.history;
+Select distinct Filename, count(distinct Filename) 
+into :act separated by "@", :n from perm.history;
 quit;
 
 %do i= 1 %to &n;
@@ -27,3 +27,4 @@ run;
 
 %end;
 %mend prgm2;
+%mend prgm2(dir=C:\Users\Priya.gupta08\Desktop\Github);
