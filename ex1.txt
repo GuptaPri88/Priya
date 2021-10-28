@@ -14,8 +14,8 @@ if d>0 then do;
    end;
 end;
 
-if lowcase(strip(Filename)) in ("csv","xls");
-drop d dn i;
+if lowcase(strip(Scan(Filename,-1,"."))) in ("csv","xls");
+drop rc d dn i;
 run;
 
 %mend FileNameReader;
