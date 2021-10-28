@@ -4,6 +4,7 @@
 %FileNameReader(dir="path");
 %prgm2(dir="path");
 
-data perm.history;
-set perm_data;
-Run;
+proc sort data = perm_data out = perm.history nodupkey;
+by filename;
+run;
+
