@@ -6,12 +6,13 @@
 
 proc sort data = perm_data out = perm.history nodupkey;
 by filename;
+where Status = "Failed";
 run;
 
 %macro prgm5(dir=); /*directory path*/
 Proc sql;
 Select distinct Filename, count(distinct Filename) 
-into :act separated by "@" , :n from perm.history where status ne "Successful";
+into :act separated by "@" , :n from perm.history;
 quit;
 
 %do i= 1 %to &n;
