@@ -1,14 +1,21 @@
 Libname perm "C:\user\priya\desktop\HistoryLib";
 
 %macro FileNameReader(dir=); /*folder directory path*/
-filename temp pipe 'dir "&dir."';
+
 Data perm.history;
-infile temp truncover;
-input txt $1-1000;
 length Status $11;
-Filename = Scan(txt,-1," ");
-if lowcase(strip(scan(Filename,-1,"."))) in ("csv","xls");
-drop txt;
+rc=filename("temp","&dir");
+d=dopen("temp");
+if d>0 then %do;
+ dn=%dnum(d);
+   %do i=1 %to dn;
+   Filename=%dread(d,i);
+   output;
+   %end;
+%end;
+
+if lowcase(strip(Filename)) in ("csv","xls");
+drop d dn;
 run;
 
 %mend FileNameReader;
