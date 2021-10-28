@@ -1,7 +1,7 @@
 
 
 %macro prgm2(dir=); /*files directory path*/
-Proc sql;
+Proc sql noprint;
 Select distinct Filename, count(distinct Filename) 
 into :act separated by "@", :n from perm.history;
 quit;
