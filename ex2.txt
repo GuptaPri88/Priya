@@ -10,7 +10,7 @@ quit;
 %let ac = %scan(&act,&i,"@");
 
 proc import Datafile = "&dir.\&ac." 
-out = %scan(&ac,1,".") 
+out = perm.%scan(&ac,1,".") 
 DBMS = %scan(&ac,-1,".") REPLACE;
 Getnames = YES;
 Run;
