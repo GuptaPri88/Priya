@@ -6,18 +6,18 @@ Data perm.history;
 length Status $11;
 rc=filename("temp","&dir");
 d=dopen("temp");
-if d>0 then %do;
- dn=%dnum(d);
-   %do i=1 %to dn;
-   Filename=%dread(d,i);
+if d>0 then do;
+ dn=dnum(d);
+   do i=1 to dn;
+   Filename=dread(d,i);
    output;
-   %end;
-%end;
+   end;
+end;
 
 if lowcase(strip(Filename)) in ("csv","xls");
-drop d dn;
+drop d dn i;
 run;
 
 %mend FileNameReader;
 
-%FileNameReader(dir="C:\user\priya\desktop\PG");
+%FileNameReader(dir=C:\user\priya\desktop\PG);
